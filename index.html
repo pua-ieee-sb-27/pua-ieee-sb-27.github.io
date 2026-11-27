@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IEEE Pharos Student Branch | Official Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --ieee-navy: #002855;
+      --ieee-blue: #00629B;
+      --ieee-accent: #0077B5;
+      --bg-canvas: #f6f9fc;
+      --surface: #ffffff;
+      --border-subtle: rgba(0, 40, 85, 0.1);
+      --border-hover: rgba(0, 98, 155, 0.35);
+      --text-primary: #0b192c;
+      --text-secondary: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-canvas);
+      background-image:
+        linear-gradient(to right, rgba(0, 98, 155, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 98, 155, 0.045) 1px, transparent 1px),
+        radial-gradient(circle at 85% 15%, rgba(0, 98, 155, 0.08), transparent 45%);
+      background-size: 40px 40px, 40px 40px, 100% 100%;
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Main Architectural Container */
+    .portal-shell {
+      width: 100%;
+      max-width: 1060px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    /* Entrance Animation */
+    .animate-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .stagger-1 { animation-delay: 0.05s; }
+    .stagger-2 { animation-delay: 0.15s; }
+    .stagger-3 { animation-delay: 0.25s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* LEFT PANEL: Official Branch Identity */
+    .identity-panel {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 34px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 45px rgba(0, 40, 85, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .identity-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--ieee-navy), var(--ieee-blue));
+    }
+
+    .org-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .logo-frame {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: var(--ieee-blue);
+      padding: 4px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(0, 98, 155, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .org-meta .term-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ieee-blue);
+      background: rgba(0, 98, 155, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .org-meta h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--ieee-navy);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .mission-text {
+      font-size: 0.92rem;
+      line-height: 1.62;
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+    }
+
+    /* Executive Metrics Row */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .metric-box {
+      background: #f8fafc;
+      border: 1px solid rgba(0, 40, 85, 0.07);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    .metric-box strong {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--ieee-navy);
+      margin-bottom: 2px;
+    }
+
+    .metric-box span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* 8 Committees Grid */
+    .domains-section {
+      margin-bottom: 24px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .committees-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .committee-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--ieee-navy);
+      background: #f1f5f9;
+      border: 1px solid rgba(0, 40, 85, 0.08);
+      padding: 8px 6px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .committee-pill.tech {
+      background: rgba(0, 98, 155, 0.07);
+      border-color: rgba(0, 98, 155, 0.16);
+      color: var(--ieee-blue);
+    }
+
+    .committee-pill:hover {
+      background: var(--ieee-navy);
+      color: #ffffff;
+      border-color: var(--ieee-navy);
+      transform: translateY(-2px);
+    }
+
+    /* Bottom Footer inside Left Panel */
+    .panel-footer {
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .share-link-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--ieee-navy);
+      font-weight: 600;
+      font-size: 0.78rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .share-link-btn:hover {
+      background: var(--ieee-navy);
+      color: #ffffff;
+      border-color: var(--ieee-navy);
+    }
+
+    /* RIGHT PANEL: Recruitment & Channels */
+    .channels-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Recruitment Featured Form Card */
+    .recruitment-card {
+      background: linear-gradient(135deg, var(--ieee-navy) 0%, #004578 100%);
+      color: #ffffff;
+      border-radius: 22px;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 35px rgba(0, 40, 85, 0.16);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .recruitment-card::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      right: -45px;
+      top: -55px;
+      pointer-events: none;
+    }
+
+    .rec-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .rec-top h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .rec-top p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+    }
+
+    .rec-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .btn-form-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: #ffffff;
+      color: var(--ieee-navy);
+      text-decoration: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 13px 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .btn-form-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+    }
+
+    /* Social Channels Grid */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+
+    .channel-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 20px 22px;
+      text-decoration: none;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 40, 85, 0.03);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.28s ease,
+                  box-shadow 0.28s ease;
+    }
+
+    .channel-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 98, 155, 0.05), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.6s ease;
+    }
+
+    .channel-card:hover::before {
+      left: 150%;
+    }
+
+    .channel-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 16px 32px rgba(0, 40, 85, 0.09);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .platform-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: var(--ieee-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.28s ease;
+    }
+
+    .channel-card:hover .platform-icon {
+      background: var(--ieee-navy);
+      color: #ffffff;
+    }
+
+    .ext-arrow {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .channel-card:hover .ext-arrow {
+      transform: translate(3px, -3px);
+      color: var(--ieee-blue);
+    }
+
+    .card-info h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--ieee-navy);
+      margin-bottom: 3px;
+    }
+
+    .card-info p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Responsive Mobile Layout */
+    @media (max-width: 850px) {
+      body {
+        padding: 16px;
+        align-items: flex-start;
+      }
+      .portal-shell {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .identity-panel {
+        padding: 26px 22px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .committees-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="portal-shell">
+    <!-- Left Column: Official Organization Profile -->
+    <section class="identity-panel animate-in stagger-1">
+      <div>
+        <div class="org-header">
+          <div class="logo-frame">
+            <img src="logo.jpeg" alt="IEEE Pharos Student Branch" onerror="this.src='https://avatars.githubusercontent.com/pua-ieee-sb-27'">
+          </div>
+          <div class="org-meta">
+            <span class="term-tag">2026 – 2027 Term</span>
+            <h1>IEEE Pharos<br>Student Branch</h1>
+          </div>
+        </div>
+
+        <p class="mission-text">
+          Advancing technological innovation, practical engineering skills, and student leadership at Pharos University in Alexandria across 8 specialized committees.
+        </p>
+
+        <!-- Key Branch Numbers -->
+        <div class="metrics-row">
+          <div class="metric-box">
+            <strong>~350</strong>
+            <span>Students</span>
+          </div>
+          <div class="metric-box">
+            <strong>8</strong>
+            <span>Committees</span>
+          </div>
+          <div class="metric-box">
+            <strong>PUA</strong>
+            <span>Alexandria</span>
+          </div>
+        </div>
+
+        <!-- 8 Committees -->
+        <div class="domains-section">
+          <span class="section-label">Our 8 Committees</span>
+          <div class="committees-grid">
+            <span class="committee-pill tech">AI</span>
+            <span class="committee-pill tech">Robotics</span>
+            <span class="committee-pill tech">Web</span>
+            <span class="committee-pill tech">Security</span>
+            <span class="committee-pill">HR</span>
+            <span class="committee-pill">PR</span>
+            <span class="committee-pill">OC</span>
+            <span class="committee-pill">Media</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <span><i class="fa-solid fa-location-dot" style="color: var(--ieee-blue); margin-right: 5px;"></i> Pharos University, Alexandria</span>
+        <button class="share-link-btn" onclick="copyPortalLink()">
+          <i class="fa-solid fa-link"></i>
+          <span id="shareBtnLabel">Copy Link</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Right Column: Recruitment Form & Official Platforms -->
+    <section class="channels-panel">
+      <!-- Recruitment Form Card -->
+      <div class="recruitment-card animate-in stagger-2">
+        <div class="rec-top">
+          <div>
+            <h2>Join IEEE PUA SB '27</h2>
+            <p>Applications are open across our Technical &amp; Operational committees. Fill out the official recruitment form to apply.</p>
+          </div>
+          <span class="rec-badge">Recruitment</span>
+        </div>
+        <!-- REPLACE THE HREF BELOW WITH YOUR GOOGLE FORM LINK -->
+        <a href="https://forms.gle/vEVV2QXJL8spVTmh7" target="_blank" rel="noopener" class="btn-form-cta">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Apply Now — Recruitment Form</span>
+          <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
+        </a>
+      </div>
+
+      <!-- 2x2 Official Platforms Grid -->
+      <div class="social-grid animate-in stagger-3">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/company/ieeepuasb/" target="_blank" rel="noopener" class="channel-card">
+          <div class="card-top">
+            <div class="platform-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+            <i class="fa-solid fa-arrow-up-right-from-square ext-arrow"></i>
+          </div>
+          <div class="card-info">
+            <h3>LinkedIn</h3>
+            <p>Professional updates &amp; achievements</p>
+          </div>
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/share/1GBU3wMJwt/?mibextid=wwXIfr" target="_blank" rel="noopener" class="channel-card">
+          <div class="card-top">
+            <div class="platform-icon"><i class="fa-brands fa-facebook-f"></i></div>
+            <i class="fa-solid fa-arrow-up-right-from-square ext-arrow"></i>
+          </div>
+          <div class="card-info">
+            <h3>Facebook</h3>
+            <p>Events, workshops &amp; announcements</p>
+          </div>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/ieeepua?bqrl=MXExMmF3OTNuM3d2cg==" target="_blank" rel="noopener" class="channel-card">
+          <div class="card-top">
+            <div class="platform-icon"><i class="fa-brands fa-instagram"></i></div>
+            <i class="fa-solid fa-arrow-up-right-from-square ext-arrow"></i>
+          </div>
+          <div class="card-info">
+            <h3>Instagram</h3>
+            <p>@ieeepua • Highlights &amp; coverage</p>
+          </div>
+        </a>
+
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@ieee.pua.sb?_r=1&_t=ZS-9Bkeb3VoJUt" target="_blank" rel="noopener" class="channel-card">
+          <div class="card-top">
+            <div class="platform-icon"><i class="fa-brands fa-tiktok"></i></div>
+            <i class="fa-solid fa-arrow-up-right-from-square ext-arrow"></i>
+          </div>
+          <div class="card-info">
+            <h3>TikTok</h3>
+            <p>@ieee.pua.sb • Tech &amp; campus reels</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function copyPortalLink() {
+      navigator.clipboard.writeText(window.location.href);
+      const label = document.getElementById("shareBtnLabel");
+      label.textContent = "Copied ✓";
+      setTimeout(() => {
+        label.textContent = "Copy Link";
+      }, 2200);
+    }
+  </script>
+</body>
+</html>
